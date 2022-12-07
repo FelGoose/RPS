@@ -46,9 +46,9 @@
             if(playerChoice == computerChoice){
                 return result = "it's a draw!"
             }
-            if(playerChoice != computerChoice && playerChoice == "PAPER" && computerChoice == "ROCK" 
-            || playerChoice != computerChoice && playerChoice == "ROCK" && computerChoice == "SCISSORS"
-            || playerChoice != computerChoice && playerChoice == "SCISSORS" && computerChoice == "PAPER"){
+            else if(playerChoice == "PAPER" && computerChoice == "ROCK" 
+                    || playerChoice == "ROCK" && computerChoice == "SCISSORS"
+                    || playerChoice == "SCISSORS" && computerChoice == "PAPER"){
                 return result = "You win!";
             } else {
                 return result = "You lose!";
