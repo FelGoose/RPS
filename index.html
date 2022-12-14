@@ -7,10 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="result"></div>
+
+    <button id="ROCK">Rock</button>
+    <button id="PAPER">Paper</button>
+    <button id="SCISSORS">Scissors</button>
+
+
     <script>
         let computerChoice,
             playerChoice,
-            result;
+            result,
+            scorePlayer = 0,
+            scoreComputer = 0;
 
 
         function getComputerChoice(){
@@ -31,13 +40,11 @@
         }
 
         function getPlayerChoice(){
-           playerChoice = prompt("input 'Rock', 'Paper', or 'Scissors'");
-           playerChoice = playerChoice.toUpperCase();
+
            return playerChoice;
         }
 
         function rps(player, computer){
-            getPlayerChoice(); //playerChoice
             getComputerChoice(); //computerChoice
 
             console.log(`the player chose: ${playerChoice}`);
@@ -49,20 +56,38 @@
             else if(playerChoice == "PAPER" && computerChoice == "ROCK" 
                     || playerChoice == "ROCK" && computerChoice == "SCISSORS"
                     || playerChoice == "SCISSORS" && computerChoice == "PAPER"){
+                scorePlayer++;
                 return result = "You win!";
             } else {
+                scoreComputer++;
                 return result = "You lose!";
             }
         }
 
-        function game(){
-            for(i=1; i<=5; i++){
-                console.log("---- Game: " +i + " ----")
-                console.log(rps());
-            }
-        }
+            const buttons = document.querySelectorAll("button");
 
-        game();
+            buttons.forEach((button) => {
+                button.addEventListener("click", () =>{
+                    playerChoice = button.id;
+                    rps();
+                
+                    console.log(result);
+                    const divResult = document.querySelector("#result");
+                    divResult.innerHTML=`The player chose: ${playerChoice} <br>
+                                         the computer chose: ${computerChoice} <br> 
+                                         result: ${result} <br> <br> 
+                                         Player ${scorePlayer} | Computer ${scoreComputer} `;
+                    if(scorePlayer >= 5){
+                        divResult.innerText=`The player wins the game!`;
+                        scorePlayer = 0;
+                        scoreComputer = 0;
+                    }else if(scoreComputer >= 5){
+                        divResult.innerText=`The computer wins the game!`;
+                        scorePlayer = 0;
+                        scoreComputer = 0;
+                    }
+                });
+            });
 
     </script>
 </body>
