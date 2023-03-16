@@ -1,0 +1,33 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.viewerContainer{
+background-color: darkgrey;
+display: flex;
+gap: 5px;
+justify-content: center;
+flex: 1;
+}
+
+.viewer{
+    height: 30vh;
+    width: 30vw;
+    background-color: grey;
+    border: 3px black;
+    display:flex;
+    justify-content: center;
+}
+
+.btnContainer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+}
+h1{
+    display: flex;
+    justify-content: center;
+}

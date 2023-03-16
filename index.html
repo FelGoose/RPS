@@ -5,12 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="viewerContainer">
+        <div class="viewer" id="player"></div>
+        <div class="viewer" id="computer"></div>
+
+<!--    <img src="https://etherrock.com/3.png" class="viewer"></img>
+        <img src="https://rollandinc-production.s3.ca-central-1.amazonaws.com/app/uploads/2019/07/22145855/paper-digital-white.jpg" class="viewer"></img>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-_tqQhSzKbYrnob0Nzslof2qORWrDgmpzpQ&usqp=CAU" class="viewer"></img> -->
+    </div>
+
+    <div class="btnContainer">
+        <button type="button" id="rock">ROCK</button>
+        <button type="button" id="paper">PAPER</button>
+        <button type="button" id="scissors">SCISSORS</button>
+    </div>
+
+    <div id="results">
+    </div>
+
     <script>
         let computerChoice,
             playerChoice,
-            result;
+            result,
+            gameCount = 0,
+            displayChoice,
+            selection,
+            container,
+            content;
 
         function getComputerChoice(){
             // generate a random number from 0-3.
@@ -25,18 +49,33 @@
                 case 2: computerChoice = "SCISSORS";
                         break;
             }
+
+            if(gameCount > 0){
+            // removes any previous images
+                selection = document.querySelector('#computer');
+                selection.removeChild(selection.firstChild);
+            }
+
+            // displays Player Choice image
+            if(computerChoice === "ROCK"){
+                selection = document.querySelector('#computer');
+                displayChoice = document.createElement('img');
+                displayChoice.src = "https://etherrock.com/3.png";
+            }if(computerChoice === "PAPER"){
+                selection = document.querySelector('#computer');
+                displayChoice = document.createElement('img');
+                displayChoice.src = "https://rollandinc-production.s3.ca-central-1.amazonaws.com/app/uploads/2019/07/22145855/paper-digital-white.jpg";
+            }  if(computerChoice === "SCISSORS"){
+                selection = document.querySelector('#computer');
+                displayChoice = document.createElement('img');
+                displayChoice.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-_tqQhSzKbYrnob0Nzslof2qORWrDgmpzpQ&usqp=CAU";
+            }  
+            selection.appendChild(displayChoice);   
+
             return computerChoice;
         }
 
-        function getPlayerChoice(){
-            // prompt player for their choice, capitalize it, store it in playerChoice.
-           playerChoice = prompt("input 'Rock', 'Paper', or 'Scissors'");
-           playerChoice = playerChoice.toUpperCase();
-           return playerChoice;
-        }
-
         function rps(player, computer){
-            getPlayerChoice(); //grabs variable "playerChoice"
             getComputerChoice(); //grabs variable "computerChoice"
 
             console.log(`the player chose: ${playerChoice}`);
@@ -44,26 +83,73 @@
 
             //determines winner based on playerChoice and computerChoice, returns "result".
             if(playerChoice == computerChoice){
-                return result = "it's a draw!"
+                result = "it's a draw!";
             }
             else if(playerChoice == "PAPER" && computerChoice == "ROCK" 
                     || playerChoice == "ROCK" && computerChoice == "SCISSORS"
                     || playerChoice == "SCISSORS" && computerChoice == "PAPER"){
-                return result = "You win!";
+                result = "You win!";
             } else {
-                return result = "You lose!";
+                result = "You lose!";
             }
+
+            
+            // remove any previous result text
+            if(gameCount > -1){
+                container = document.querySelector('#results');
+                container.removeChild(container.firstChild);
+            }
+
+
+            //display result text
+            container = document.querySelector('#results');
+            content = document.createElement('h1');
+            content.textContent = result;
+            container.appendChild(content);
+
+            //return to output in console
+
+            gameCount++;
+            console.log("---- Game: " + gameCount + " ----")
+            return result;
         }
 
         function game(){
-            //loops trough the game 5 times, prints it to console.
-            for(i=1; i<=5; i++){
-                console.log("---- Game: " +i + " ----")
                 console.log(rps());
-            }
         }
 
-        game();
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button) =>{
+                button.addEventListener('click', ()=> {
+                    console.log(button.id);
+                    playerChoice = button.id.toUpperCase();
+
+                        if(gameCount > 0){
+                            // removes any previous images
+                            selection = document.querySelector('#player');
+                            selection.removeChild(selection.firstChild);
+                        }
+
+                        // displays Player Choice image
+                        if(playerChoice === "ROCK"){
+                            selection = document.querySelector('#player');
+                        displayChoice = document.createElement('img');
+                            displayChoice.src = "https://etherrock.com/3.png";
+                        }if(playerChoice === "PAPER"){
+                            selection = document.querySelector('#player');
+                            displayChoice = document.createElement('img');
+                            displayChoice.src = "https://rollandinc-production.s3.ca-central-1.amazonaws.com/app/uploads/2019/07/22145855/paper-digital-white.jpg";
+                        }  if(playerChoice === "SCISSORS"){
+                            selection = document.querySelector('#player');
+                            displayChoice = document.createElement('img');
+                            displayChoice.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-_tqQhSzKbYrnob0Nzslof2qORWrDgmpzpQ&usqp=CAU";
+                        }  
+                        selection.appendChild(displayChoice);   
+
+                    game();
+                });
+            })
+
 
     </script>
 </body>
