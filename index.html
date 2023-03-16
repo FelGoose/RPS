@@ -12,12 +12,10 @@
             playerChoice,
             result;
 
-
         function getComputerChoice(){
+            // generate a random number from 0-3.
+            // Determine computers action based on which number it generated.
             // 0=rock, 1=paper, 2=scissors
-            // math.random generates a float from 0 to 1
-            // the value is multiplied by 3
-            // math floor rounds down to an integer.
             computerChoice = Math.floor(Math.random() * 3);
             switch(computerChoice){
                 case 0: computerChoice = "ROCK";
@@ -31,18 +29,20 @@
         }
 
         function getPlayerChoice(){
+            // prompt player for their choice, capitalize it, store it in playerChoice.
            playerChoice = prompt("input 'Rock', 'Paper', or 'Scissors'");
            playerChoice = playerChoice.toUpperCase();
            return playerChoice;
         }
 
         function rps(player, computer){
-            getPlayerChoice(); //playerChoice
-            getComputerChoice(); //computerChoice
+            getPlayerChoice(); //grabs variable "playerChoice"
+            getComputerChoice(); //grabs variable "computerChoice"
 
             console.log(`the player chose: ${playerChoice}`);
             console.log(`the computer chose: ${computerChoice}`);
 
+            //determines winner based on playerChoice and computerChoice, returns "result".
             if(playerChoice == computerChoice){
                 return result = "it's a draw!"
             }
@@ -56,6 +56,7 @@
         }
 
         function game(){
+            //loops trough the game 5 times, prints it to console.
             for(i=1; i<=5; i++){
                 console.log("---- Game: " +i + " ----")
                 console.log(rps());
