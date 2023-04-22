@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<<<<<<< HEAD
     <div class="viewerContainer">
         <div class="viewer" id="player"></div>
         <div class="viewer" id="computer"></div>
@@ -21,16 +22,30 @@
 
     <div id="results">
     </div>
+=======
+    <div id="result"></div>
+
+    <button id="ROCK">Rock</button>
+    <button id="PAPER">Paper</button>
+    <button id="SCISSORS">Scissors</button>
+
+>>>>>>> 1fd804cce5d7b9f5ce69cc9d25a70fe55aaaa182
 
     <script>
         let computerChoice,
             playerChoice,
             result,
+<<<<<<< HEAD
             gameCount = 0,
             displayChoice,
             selection,
             container,
             content;
+=======
+            scorePlayer = 0,
+            scoreComputer = 0;
+
+>>>>>>> 1fd804cce5d7b9f5ce69cc9d25a70fe55aaaa182
 
         function getComputerChoice(){
             // generate a random number from 0-3.
@@ -71,8 +86,18 @@
             return computerChoice;
         }
 
+<<<<<<< HEAD
         function rps(player, computer){
             getComputerChoice(); //grabs variable "computerChoice"
+=======
+        function getPlayerChoice(){
+
+           return playerChoice;
+        }
+
+        function rps(player, computer){
+            getComputerChoice(); //computerChoice
+>>>>>>> 1fd804cce5d7b9f5ce69cc9d25a70fe55aaaa182
 
             console.log(`the player chose: ${playerChoice}`);
             console.log(`the computer chose: ${computerChoice}`);
@@ -84,9 +109,17 @@
             else if(playerChoice == "PAPER" && computerChoice == "ROCK" 
                     || playerChoice == "ROCK" && computerChoice == "SCISSORS"
                     || playerChoice == "SCISSORS" && computerChoice == "PAPER"){
+<<<<<<< HEAD
                 result = "You win!";
             } else {
                 result = "You lose!";
+=======
+                scorePlayer++;
+                return result = "You win!";
+            } else {
+                scoreComputer++;
+                return result = "You lose!";
+>>>>>>> 1fd804cce5d7b9f5ce69cc9d25a70fe55aaaa182
             }
 
             
@@ -110,6 +143,7 @@
             return result;
         }
 
+<<<<<<< HEAD
         function game(){
                 console.log(rps());
         }
@@ -146,6 +180,32 @@
                 });
             })
 
+=======
+            const buttons = document.querySelectorAll("button");
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", () =>{
+                    playerChoice = button.id;
+                    rps();
+                
+                    console.log(result);
+                    const divResult = document.querySelector("#result");
+                    divResult.innerHTML=`The player chose: ${playerChoice} <br>
+                                         the computer chose: ${computerChoice} <br> 
+                                         result: ${result} <br> <br> 
+                                         Player ${scorePlayer} | Computer ${scoreComputer} `;
+                    if(scorePlayer >= 5){
+                        divResult.innerText=`The player wins the game!`;
+                        scorePlayer = 0;
+                        scoreComputer = 0;
+                    }else if(scoreComputer >= 5){
+                        divResult.innerText=`The computer wins the game!`;
+                        scorePlayer = 0;
+                        scoreComputer = 0;
+                    }
+                });
+            });
+>>>>>>> 1fd804cce5d7b9f5ce69cc9d25a70fe55aaaa182
 
     </script>
 </body>
